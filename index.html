@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Strength Indicator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="heading">Password Strength Indicator</h2>
+      <div class="inputBox">
+        <input
+          autofocus="true,"
+          type="password"
+          name=""
+          id="password"
+          placeholder="Please enter your password"
+        />
+        <img id="submit" src="images/lightening.png" alt="" />
+        <p id="message">Password is <span id="strength"></span></p>
+      </div>
+    </div>
+
+    <script>
+      let password = document.getElementById("password");
+      let msg = document.getElementById("message");
+      let strength = document.getElementById("strength");
+      let btn = document.getElementById("btn");
+
+      password.addEventListener("input", function () {
+        let length = password.value.length;
+        if (length > 0 && length <= 4) {
+          msg.style.display = "block";
+          strength.innerHTML = "Weak";
+          password.style.borderColor = "Red";
+          // msg.style.color = "Red"
+          strength.style.color = "Red";
+        } else if (length > 4 && length <= 8) {
+          strength.innerHTML = "Medium";
+          password.style.borderColor = "Yellow";
+          strength.style.color = "Yellow";
+        } else if (length > 8) {
+          strength.innerHTML = "Strong";
+          password.style.borderColor = "#26d730";
+          strength.style.color = "#26d730";
+        }
+      });
+
+      // Show Password
+      document.getElementById("submit").addEventListener("click", function () {
+        if (password.type == "password") {
+          password.type = "text";
+          console.log("mouse clicked");
+        } else {
+          password.type = "password";
+        }
+      });
+
+      // show password via enter key
+      document
+        .getElementById("submit")
+        .addEventListener("keydown", function (event) {
+          if (event.keyCode === 13) {
+            if (password.type == "password") {
+              password.type = "text";
+            } else password.type = "password";
+            console.log("enter key is pressed");
+          }
+        });
+    </script>
+  </body>
+</html>
